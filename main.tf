@@ -1,9 +1,9 @@
 ############## Ec2 Instance ##################
 module "ec2" {
-  source = "./modules/ec2"
-  instance_type = "t3.micro"
-  vpc_id = module.vpc.vpc_id
-  vpc_subnets = module.vpc.public_subnets
+  source        = "./modules/ec2"
+  instance_type = var.instance_type
+  vpc_id        = module.vpc.vpc_id
+  vpc_subnets   = module.vpc.public_subnets
 }
 
 

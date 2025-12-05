@@ -19,7 +19,6 @@ resource "aws_instance" "demoec2" {
   instance_type               = var.instance_type
   associate_public_ip_address = true
   subnet_id                   = var.vpc_subnets[0]
-  vpc_security_group_ids      = [var.vpc_id]
 
   tags = {
     Name = "Demo-Ec2"

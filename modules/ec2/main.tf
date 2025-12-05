@@ -20,6 +20,12 @@ resource "aws_instance" "demoec2" {
   associate_public_ip_address = true
   subnet_id                   = var.vpc_subnets[0]
 
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 1
+  }
+
   tags = {
     Name = "Demo-Ec2"
   }

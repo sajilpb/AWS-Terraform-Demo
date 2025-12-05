@@ -23,8 +23,23 @@ jobs:
           role-to-assume: arn:aws:iam::955967371588:role/aws-github-role
           aws-region: us-east-1
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.7.6"
+
+      - name: Terraform Fmt Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        run: terraform validate
+
       - name: Terraform Init
         run: terraform init
+
+      - name: Run tfsec
+        # Use official tfsec container to scan the repository
+        run: docker run --rm -v "${{ github.workspace }}:/src" aquasecurity/tfsec:latest /src
 
       - name: Terraform Plan
         run: terraform plan
